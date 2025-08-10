@@ -1,0 +1,7 @@
+echo "HEY BOB U UP?" | cargo run -- --key 5
+
+echo "MJ^%GTG%Z%ZUD" | cargo run -- --key=-5
+
+*** A note about types ***
+In Go, byte is an alias for uint8. Go takes bytes as kind of whatever. -5 or 5 doesn't matter, it's a byte.
+Rust isn't so free wheeling. There is no "byte" type. It's u8. And that's a STRICT u8, no negatives.
