@@ -5,11 +5,25 @@ pub fn encipher(input: &[u8], key: &u8) -> Vec<u8> {
     return input.iter().map(|x| x + key).collect();
 }
 
+pub fn decipher(input: &[u8], key: &u8) -> Vec<u8> {
+    return input.iter().map(|x| x - key).collect();
+}
+
 // Conditional compilation attribute, only compile when running tests.
 #[cfg(test)]
 mod tests {
     // Use mod to keep tests scoped and organized.
     use super::*;
+    // struct TestCases {
+    //     test_name: String,
+    //     plain_text: Vec<u8>,
+    // }
+    // static TEST_CASES: [TestCases; 1] = [
+    //     TestCases{
+    //         test_name: "HAL to IBM".to_string(),
+    //         plain_text: b"HAL".to_vec(),
+    //     },
+    // ];
     #[test] // Rust's test runner will be able to find and run this as a test.
     fn test_encipher_transforms() {
         let tests = vec![
@@ -20,6 +34,24 @@ mod tests {
         ];
         for (name, key, input, expected) in tests {
             let got = encipher(&input, &key);
+            assert_eq!(
+                expected, got,
+                "test name: {}, key: {}, expected {:?}, got {:?}",
+                name, key, expected, got
+            );
+        }
+    }
+
+    #[test]
+    fn test_decipher_transforms() {
+        let tests = vec![
+            ("IBM to HAL", 1u8, b"IBM".to_vec(), b"HAL".to_vec()),
+            ("URGE to SPEC", 2u8, b"URGE".to_vec(), b"SPEC".to_vec()),
+            ("SHUN to PERK", 3u8, b"SHUN".to_vec(), b"PERK".to_vec()),
+            ("LOOP to BEEF", 10u8, b"LOOP".to_vec(), b"BEEF".to_vec()),
+        ];
+        for (name, key, input, expected) in tests {
+            let got = decipher(&input, &key);
             assert_eq!(
                 expected, got,
                 "test name: {}, key: {}, expected {:?}, got {:?}",

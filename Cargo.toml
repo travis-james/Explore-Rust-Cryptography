@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "shift",
+    "cmd/encipher",
+    "cmd/decipher"
+]
