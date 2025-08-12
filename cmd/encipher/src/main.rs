@@ -1,4 +1,4 @@
-use std::io::{self, Read};
+use std::io::{self, Read, Write};
 
 use clap::Parser;
 use shift::encipher;
@@ -18,6 +18,10 @@ fn main() {
 
     let args = Args::parse();
 
-    let ciphered_bytes = encipher(&input, &args.key);
-    println!("{}", String::from_utf8_lossy(&ciphered_bytes));
+    let ciphered_bytes = encipher(&input, args.key);
+
+    // Write raw bytes to stdout
+    io::stdout()
+        .write_all(&ciphered_bytes)
+        .expect("Failed to write output");
 }

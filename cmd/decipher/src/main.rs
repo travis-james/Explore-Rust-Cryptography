@@ -18,6 +18,8 @@ fn main() {
 
     let args = Args::parse();
 
-    let ciphered_bytes = decipher(&input, &args.key);
-    println!("{}", String::from_utf8_lossy(&ciphered_bytes));
+    let ciphered_bytes = decipher(&input, args.key);
+    io::stdout()
+        .write_all(&ciphered_bytes)
+        .expect("Failed to write output");
 }
