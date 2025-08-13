@@ -93,34 +93,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b94f61472cee1439c0b966b47e3aca9ae07e45d070759512cd390ea2bebc6675"
 
 [[package]]
+name = "cmd"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "shift",
+]
+
+[[package]]
 name = "colorchoice"
 version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b05b61dc5112cbb17e4b6cd61790d9845d13888356391624cbe7e41efeac1e75"
-
-[[package]]
-name = "crack"
-version = "0.1.0"
-dependencies = [
- "clap",
- "shift",
-]
-
-[[package]]
-name = "decipher"
-version = "0.1.0"
-dependencies = [
- "clap",
- "shift",
-]
-
-[[package]]
-name = "encipher"
-version = "0.1.0"
-dependencies = [
- "clap",
- "shift",
-]
 
 [[package]]
 name = "heck"

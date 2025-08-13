@@ -1,6 +1,6 @@
-echo "HEY BOB U UP?" | cargo run -- --key 5
+echo "HEY BOB U UP?" | cargo run -- --mode encipher --key 5
 
-echo "MJ^%GTG%Z%ZUD" | cargo run -- --key=-5
+echo "MJ^%GTG%Z%ZUD" | cargo run -- --mode decipher --key=5
 
 *** A note about types ***
 In Go, byte is an alias for uint8. Go takes bytes as kind of whatever. -5 or 5 doesn't matter, it's a byte.
@@ -9,18 +9,15 @@ Rust isn't so free wheeling. There is no "byte" type. It's u8. And that's a STRI
 cargo new  blah --bin // doing this for commands.
 cargo new blah --lib 
 
--p says what package to run.
-echo "hello" | cargo run -p encipher -- --key 5
-echo "mjqqt" | cargo run -p decipher -- --key 5
 
 The Cargo.toml at the base directory is a workspace manifest, not a crate manifest. The members are relative paths.
-
-cargo run -p encipher -- --key 7 < tiger.txt > tiger.bin
-cargo run -p crack -- --crib 'The tiger' < tiger.bin | iconv -f UTF-8 -t UTF-8
-
-cargo run -p encipher -- --key 99 < devil.png > devil.bin
-cargo run -p crack -- --crib $(printf '\x89PNG') <devil.bin >plain.png
 
 Clap wants CLI input to be UTF8 strings then converts, it won't accept bytes even if the flag type isn't string.
   Running `target/debug/crack --crib '�PNG'`
 error: invalid UTF-8 was detected in one or more arguments
+
+cargo run -- --mode encipher --key=7 < tiger.txt > tiger.bin
+cargo run -- --mode crack --crib 'The tiger' < tiger.bin | iconv -f UTF-8 -t UTF-8
+
+cargo run -- --mode encipher --key 99 < devil.png > devil.bin
+cargo run -- --mode crack --crib $(printf '\x89PNG') <devil.bin >plain.png CANT DO IT. Clap doesn't accept raw bytes, converts to string. Can't pass in std in, because the input that's being worked on is used for stdin. I don't want to do a bunch of workarounds for this.

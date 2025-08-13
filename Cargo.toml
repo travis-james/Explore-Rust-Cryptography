@@ -1,7 +1,5 @@
 [workspace]
 members = [
     "shift",
-    "cmd/encipher",
-    "cmd/decipher",
-    "cmd/crack"
+    "cmd"
 ]
